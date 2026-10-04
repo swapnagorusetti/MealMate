@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meal Mate</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background: #f7f5ef;
+            color: #124f3e;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            width: 100%;
+            height: 82px;
+            background: #fffdf8;
+            border-top: 3px solid #f26b3a;
+            border-bottom: 1px solid #ddd8ce;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-circle {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 50%;
+
+            background: #145c47;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+
+        .logo-text .mate {
+            color: #f26b3a;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .nav-right a {
+            text-decoration: none;
+            color: #124f3e;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .nav-right a:hover {
+            color: #f26b3a;
+        }
+
+        .create-account {
+            background: #145c47;
+            color: white !important;
+
+            padding: 14px 25px;
+
+            border-radius: 6px;
+        }
+
+        .create-account:hover {
+            background: #0d4636;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: calc(100vh - 82px);
+
+            display: flex;
+            align-items: center;
+
+            padding: 70px 7%;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            width: 48%;
+            z-index: 2;
+        }
+
+        .small-title {
+            color: #53766b;
+
+            font-size: 17px;
+            letter-spacing: 5px;
+            font-weight: bold;
+
+            margin-bottom: 25px;
+        }
+
+        .hero-title {
+            font-size: clamp(55px, 6vw, 90px);
+
+            line-height: 0.92;
+
+            color: #145c47;
+
+            margin-bottom: 28px;
+
+            letter-spacing: -3px;
+        }
+
+        .hero-description {
+            color: #5d716c;
+
+            font-size: 20px;
+
+            line-height: 1.6;
+
+            max-width: 600px;
+
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            display: inline-block;
+
+            text-decoration: none;
+
+            padding: 15px 28px;
+
+            border-radius: 5px;
+
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .primary-btn {
+            background: #145c47;
+            color: white;
+        }
+
+        .primary-btn:hover {
+            background: #0d4636;
+        }
+
+        .secondary-btn {
+            border: 1px solid #9eaaa4;
+            color: #124f3e;
+            background: #fffdf8;
+        }
+
+        .secondary-btn:hover {
+            border-color: #f26b3a;
+            color: #f26b3a;
+        }
+
+
+        /* =========================
+           FOOD IMAGE
+        ========================= */
+
+        .hero-image-area {
+            width: 52%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: relative;
+        }
+
+        .food-circle {
+            width: 500px;
+            height: 500px;
+
+            border-radius: 50%;
+
+            background: #e5e8dc;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+        }
+
+        .food-image {
+            width: 430px;
+            height: 430px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 15px solid #fffdf8;
+
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .special-card {
+            position: absolute;
+
+            right: -10px;
+            bottom: 30px;
+
+            width: 390px;
+
+            background: #fffdf8;
+
+            padding: 28px 35px;
+
+            border-top: 7px solid #145c47;
+
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        .special-small {
+            color: #f26b3a;
+
+            letter-spacing: 4px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 12px;
+        }
+
+        .special-title {
+            font-size: 42px;
+
+            color: #145c47;
+
+            margin-bottom: 8px;
+        }
+
+        .special-text {
+            color: #66756f;
+
+            font-size: 17px;
+        }
+
+
+        /* Decorative circles */
+
+        .orange-dot {
+            width: 20px;
+            height: 20px;
+
+            border-radius: 50%;
+
+            background: #f26b3a;
+
+            position: absolute;
+
+            right: 4%;
+            top: 30%;
+        }
+
+        .green-dot {
+            width: 14px;
+            height: 14px;
+
+            border-radius: 50%;
+
+            background: #145c47;
+
+            position: absolute;
+
+            left: 52%;
+            bottom: 12%;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .navbar {
+                padding: 0 25px;
+            }
+
+            .nav-right {
+                gap: 15px;
+            }
+
+            .nav-right a:first-child {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+
+                text-align: center;
+
+                padding: 60px 25px;
+
+                min-height: auto;
+            }
+
+            .hero-content {
+                width: 100%;
+            }
+
+            .hero-title {
+                font-size: 60px;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image-area {
+                width: 100%;
+
+                margin-top: 60px;
+            }
+
+            .food-circle {
+                width: 400px;
+                height: 400px;
+            }
+
+            .food-image {
+                width: 340px;
+                height: 340px;
+            }
+
+            .special-card {
+                right: 0;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                height: 70px;
+            }
+
+            .logo-text {
+                font-size: 25px;
+            }
+
+            .logo-circle {
+                width: 42px;
+                height: 42px;
+                font-size: 21px;
+            }
+
+            .create-account {
+                padding: 10px 15px;
+                font-size: 14px !important;
+            }
+
+            .hero {
+                padding: 45px 20px;
+            }
+
+            .small-title {
+                font-size: 13px;
+                letter-spacing: 3px;
+            }
+
+            .hero-title {
+                font-size: 48px;
+                letter-spacing: -2px;
+            }
+
+            .hero-description {
+                font-size: 17px;
+            }
+
+            .food-circle {
+                width: 300px;
+                height: 300px;
+            }
+
+            .food-image {
+                width: 255px;
+                height: 255px;
+                border-width: 10px;
+            }
+
+            .special-card {
+                position: relative;
+
+                right: auto;
+                bottom: auto;
+
+                width: 90%;
+
+                margin-top: -50px;
+
+                text-align: left;
+            }
+
+            .special-title {
+                font-size: 32px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            <div class="logo-circle">
+                M
+            </div>
+
+            <div class="logo-text">
+                Meal <span class="mate">Mate</span>
+            </div>
+
+        </div>
+
+
+        <nav class="nav-right">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/open_signin">
+                Sign in
+            </a>
+
+            <a href="/open_signup" class="create-account">
+                Create account
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================
+         HERO SECTION
+    ========================== -->
+
+    <main>
+
+        <section class="hero">
+
+
+            <div class="hero-content">
+
+                <div class="small-title">
+                    GOOD FOOD, GOOD TIMING
+                </div>
+
+
+                <h1 class="hero-title">
+
+                    Your next<br>
+                    favorite<br>
+                    meal is<br>
+                    closer than<br>
+                    you think.
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Browse local restaurants, build your plate,
+                    and get a little more joy delivered to your door.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a href="/open_signup" class="primary-btn">
+                        Start eating well
+                    </a>
+
+                    <a href="/open_signin" class="secondary-btn">
+                        Sign in
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FOOD IMAGE -->
+
+            <div class="hero-image-area">
+
+                <div class="food-circle">
+
+                    <img
+                        class="food-image"
+                        src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=900&q=85"
+                        alt="Delicious food"
+                    >
+
+                </div>
+
+
+                <div class="special-card">
+
+                    <div class="special-small">
+                        TODAY'S SPECIAL
+                    </div>
+
+                    <div class="special-title">
+                        Fresh
+                    </div>
+
+                    <div class="special-text">
+                        Made to order, delivered with care.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="orange-dot"></div>
+
+            <div class="green-dot"></div>
+
+
+        </section>
+
+    </main>
+
+
+</body>
+
+</html>

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Update Menu - Meal Mate</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f5ef;
+            color: #164f3d;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 90px;
+            background: #ffffff;
+            border-top: 3px solid #ff7043;
+            border-bottom: 1px solid #e5e1d8;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 46px;
+            height: 46px;
+
+            background: #145743;
+            color: white;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+        }
+
+        .logo-meal {
+            color: #145743;
+        }
+
+        .logo-mate {
+            color: #ff7043;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .home-link {
+            color: #145743;
+            text-decoration: none;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .admin-btn {
+            background: #edf1ec;
+            color: #145743;
+
+            padding: 12px 22px;
+
+            border-radius: 30px;
+
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 72%;
+            margin: 65px auto;
+        }
+
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+
+            margin-bottom: 40px;
+        }
+
+        .small-title {
+            color: #ff7043;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            letter-spacing: 5px;
+
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 58px;
+
+            color: #145743;
+
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #607d8b;
+        }
+
+        .restaurant-btn {
+            background: #145743;
+            color: white;
+
+            text-decoration: none;
+
+            padding: 15px 25px;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+        }
+
+        /* ================= MENU ITEMS ================= */
+
+        .items-container {
+            background: white;
+
+            border: 1px solid #ddd9cf;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            margin-bottom: 35px;
+        }
+
+        .item-heading {
+            padding: 28px 35px;
+
+            border-bottom: 1px solid #e5e1d8;
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 28px;
+
+            color: #145743;
+        }
+
+        .no-items {
+            padding: 75px 20px;
+
+            text-align: center;
+        }
+
+        .no-items-icon {
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 20px;
+
+            background: #edf1ec;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 30px;
+        }
+
+        .no-items h2 {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 30px;
+
+            margin-bottom: 10px;
+
+            color: #145743;
+        }
+
+        .no-items p {
+            color: #607d8b;
+            font-size: 17px;
+        }
+
+        /* ================= ITEM CARD ================= */
+
+        .item-card {
+            display: flex;
+            align-items: center;
+
+            gap: 30px;
+
+            padding: 25px 35px;
+
+            border-bottom: 1px solid #e5e1d8;
+        }
+
+        .item-card:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 120px;
+            height: 90px;
+
+            object-fit: cover;
+
+            border-radius: 12px;
+
+            flex-shrink: 0;
+
+            background: #eee;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 25px;
+
+            color: #145743;
+
+            margin-bottom: 7px;
+        }
+
+        .item-description {
+            color: #607d8b;
+
+            font-size: 15px;
+
+            margin-bottom: 8px;
+        }
+
+        .item-price {
+            color: #ff7043;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+        .veg {
+            display: inline-block;
+
+            margin-left: 10px;
+
+            padding: 4px 9px;
+
+            border-radius: 15px;
+
+            background: #e7f4e9;
+
+            color: #25834c;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-container {
+            background: white;
+
+            border: 1px solid #ddd9cf;
+
+            border-radius: 18px;
+
+            padding: 40px;
+
+            margin-bottom: 50px;
+        }
+
+        .form-title {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 34px;
+
+            color: #145743;
+
+            margin-bottom: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: #145743;
+
+            font-weight: bold;
+
+            margin-bottom: 9px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="url"],
+        textarea {
+            width: 100%;
+
+            padding: 15px;
+
+            border: 1px solid #d8d8d8;
+
+            border-radius: 9px;
+
+            font-size: 16px;
+
+            outline: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="url"]:focus,
+        textarea:focus {
+            border-color: #145743;
+        }
+
+        textarea {
+            min-height: 120px;
+
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 5px;
+        }
+
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+        }
+
+        .submit-btn {
+            margin-top: 30px;
+
+            background: #145743;
+
+            color: white;
+
+            border: none;
+
+            padding: 15px 30px;
+
+            border-radius: 7px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #0f4434;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+
+            color: #78909c;
+
+            margin: 40px 0;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+
+            .container {
+                width: 90%;
+            }
+
+            .top-section {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 25px;
+            }
+
+            h1 {
+                font-size: 42px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .item-card {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🍴
+        </div>
+
+        <span class="logo-meal">Meal</span>
+        <span class="logo-mate">Mate</span>
+
+    </div>
+
+
+    <div class="header-right">
+
+        <a href="/signin"
+           class="home-link">
+            Home
+        </a>
+
+        <a href="/signin"
+           class="admin-btn">
+            🅰 Admin Panel
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+
+    <!-- TOP -->
+
+    <div class="top-section">
+
+        <div>
+
+            <div class="small-title">
+                MEAL MATE MANAGEMENT
+            </div>
+
+            <h1>
+                Update Menu
+            </h1>
+
+            <p class="subtitle">
+                Add and manage menu items for this restaurant.
+            </p>
+
+        </div>
+
+
+        <a href="{% url 'open_show_restaurant' %}"
+           class="restaurant-btn">
+
+            ← Restaurants
+
+        </a>
+
+    </div>
+
+
+
+    <!-- ================= EXISTING ITEMS ================= -->
+
+    <div class="items-container">
+
+        <div class="item-heading">
+            Menu Items
+        </div>
+
+
+        {% if item_list %}
+
+
+            {% for item in item_list %}
+
+                <div class="item-card">
+
+
+                    {% if item.picture %}
+
+                        <img
+                            src="{{ item.picture }}"
+                            alt="{{ item.name }}"
+                            class="item-image"
+                        >
+
+                    {% else %}
+
+                        <div class="item-image"
+                             style="
+                             display:flex;
+                             align-items:center;
+                             justify-content:center;
+                             font-size:30px;
+                             ">
+                            🍽️
+                        </div>
+
+                    {% endif %}
+
+
+
+                    <div class="item-details">
+
+                        <div class="item-name">
+                            {{ item.name }}
+                        </div>
+
+
+                        <div class="item-description">
+
+                            {{ item.description }}
+
+                        </div>
+
+
+                        <div class="item-price">
+
+                            ₹{{ item.price }}
+
+                            {% if item.vegetarian %}
+
+                                <span class="veg">
+                                    VEG
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <div class="no-items">
+
+                <div class="no-items-icon">
+                    🍽️
+                </div>
+
+                <h2>
+                    No menu items yet
+                </h2>
+
+                <p>
+                    Add the first menu item for this restaurant.
+                </p>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+
+    <!-- ================= ADD MENU ITEM ================= -->
+
+    <div class="form-container">
+
+
+        <div class="form-title">
+            Add Menu Item
+        </div>
+
+
+        <form
+            method="POST"
+            action="{% url 'update_menu' restaurant_id %}"
+        >
+
+            {% csrf_token %}
+
+
+            <div class="form-grid">
+
+
+                <!-- ITEM NAME -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Item Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter item name"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- PRICE -->
+
+                <div class="form-group">
+
+                    <label for="price">
+                        Price
+                    </label>
+
+                    <input
+                        type="number"
+                        id="price"
+                        name="price"
+                        placeholder="Enter price"
+                        step="0.01"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group full-width">
+
+                    <label for="description">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        placeholder="Enter item description"
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- PICTURE -->
+
+                <div class="form-group full-width">
+
+                    <label for="picture">
+                        Picture URL
+                    </label>
+
+                    <input
+                        type="url"
+                        id="picture"
+                        name="picture"
+                        placeholder="https://example.com/food.jpg"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- VEGETARIAN -->
+
+                <div class="form-group">
+
+                    <label>
+                        Vegetarian
+                    </label>
+
+                    <div class="checkbox-group">
+
+                        <input
+                            type="checkbox"
+                            id="vegetarian"
+                            name="vegetarian"
+                        >
+
+                        <label for="vegetarian">
+                            This is a vegetarian item
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+
+                Add Item →
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    Meal Mate · Restaurant Management
+
+</footer>
+
+
+</body>
+
+</html>

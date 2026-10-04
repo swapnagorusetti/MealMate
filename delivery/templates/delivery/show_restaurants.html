@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Restaurants - Meal Mate</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #f8f7f2;
+            color: #164f3d;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 82px;
+
+            background: #ffffff;
+
+            border-top: 4px solid #f16b45;
+            border-bottom: 1px solid #deded8;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5.5%;
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-family: Georgia, serif;
+            font-size: 31px;
+            font-weight: bold;
+        }
+
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: #145540;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: Arial, sans-serif;
+            font-size: 19px;
+        }
+
+
+        .meal {
+            color: #145540;
+        }
+
+
+        .mate {
+            color: #f16b45;
+        }
+
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+
+        .home {
+            color: #145540;
+
+            text-decoration: none;
+
+            font-family: Georgia, serif;
+
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+
+        .admin-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            background: #eef1ec;
+
+            color: #164f3d;
+
+            padding: 10px 18px;
+
+            border-radius: 30px;
+
+            font-family: Georgia, serif;
+
+            font-weight: bold;
+        }
+
+
+        .admin-circle {
+            width: 32px;
+            height: 32px;
+
+            background: #145540;
+
+            color: white;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 88%;
+            max-width: 1250px;
+
+            margin: 65px auto;
+        }
+
+
+        /* ================= PAGE TOP ================= */
+
+        .page-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-end;
+
+            margin-bottom: 35px;
+        }
+
+
+        .section-label {
+            color: #f16b45;
+
+            font-family: Georgia, serif;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            letter-spacing: 4px;
+
+            margin-bottom: 12px;
+        }
+
+
+        h1 {
+            color: #145540;
+
+            font-family: Georgia, serif;
+
+            font-size: 58px;
+
+            line-height: 1;
+
+            margin-bottom: 14px;
+        }
+
+
+        .subtitle {
+            color: #58716b;
+
+            font-size: 17px;
+        }
+
+
+        /* ================= ADD BUTTON ================= */
+
+        .add-button {
+            background: #145540;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 14px 22px;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+
+            font-size: 15px;
+
+            transition: 0.2s;
+        }
+
+
+        .add-button:hover {
+            background: #0d4030;
+        }
+
+
+        /* ================= RESTAURANT CONTAINER ================= */
+
+        .restaurants-container {
+
+            background: #ffffff;
+
+            border: 1px solid #deded8;
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 15px 35px rgba(22, 79, 61, 0.08);
+        }
+
+
+        /* ================= RESTAURANT ROW ================= */
+
+        .restaurant-row {
+
+            min-height: 205px;
+
+            display: grid;
+
+            grid-template-columns:
+                180px
+                270px
+                180px
+                120px
+                250px;
+
+            align-items: center;
+
+            column-gap: 25px;
+
+            padding: 22px 30px;
+
+            border-bottom: 1px solid #e5e5df;
+        }
+
+
+        .restaurant-row:last-child {
+            border-bottom: none;
+        }
+
+
+        /* ================= RESTAURANT NAME ================= */
+
+        .restaurant-name {
+
+            color: #164f3d;
+
+            font-family: Georgia, serif;
+
+            font-size: 23px;
+
+            font-weight: bold;
+
+            text-align: center;
+        }
+
+
+        /* ================= IMAGE ================= */
+
+        .image-container {
+
+            display: flex;
+
+            justify-content: center;
+        }
+
+
+        .restaurant-image {
+
+            width: 240px;
+
+            height: 160px;
+
+            object-fit: cover;
+
+            border-radius: 12px;
+
+            display: block;
+
+            box-shadow:
+                0 6px 15px rgba(0, 0, 0, 0.12);
+        }
+
+
+        /* ================= CUISINE ================= */
+
+        .cuisine {
+
+            color: #526a64;
+
+            font-size: 17px;
+
+            text-align: center;
+        }
+
+
+        .cuisine-label {
+
+            color: #f16b45;
+
+            font-weight: bold;
+        }
+
+
+        /* ================= RATING ================= */
+
+        .rating {
+
+            background: #eef3ed;
+
+            color: #145540;
+
+            padding: 10px 13px;
+
+            border-radius: 25px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            text-align: center;
+
+            width: 90px;
+
+            margin: auto;
+        }
+
+
+        /* ================= ACTIONS ================= */
+
+        .actions {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 9px;
+        }
+
+
+        .update-info {
+
+            color: #145540;
+
+            text-decoration: none;
+
+            font-family: Georgia, serif;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            text-align: center;
+
+            margin-bottom: 2px;
+        }
+
+
+        /* DELETE BUTTON */
+
+        .delete-button {
+
+            width: 220px;
+
+            background: #f4e5e1;
+
+            color: #c74632;
+
+            border: none;
+
+            padding: 12px;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+
+            text-align: center;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .delete-button:hover {
+
+            background: #f0d6d0;
+        }
+
+
+        /* UPDATE MENU */
+
+        .menu-button {
+
+            width: 220px;
+
+            background: #145540;
+
+            color: white;
+
+            padding: 12px;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+
+            text-align: center;
+
+            font-size: 15px;
+
+            font-weight: bold;
+        }
+
+
+        .menu-button:hover {
+
+            background: #0d4030;
+        }
+
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+
+            padding: 90px 20px;
+
+            text-align: center;
+        }
+
+
+        .empty-icon {
+
+            width: 65px;
+            height: 65px;
+
+            margin: 0 auto 20px;
+
+            background: #eef1ec;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 30px;
+        }
+
+
+        .empty h2 {
+
+            color: #145540;
+
+            font-family: Georgia, serif;
+
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .empty p {
+
+            color: #70817b;
+
+            font-size: 16px;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            text-align: center;
+
+            color: #82918d;
+
+            font-size: 14px;
+
+            margin: 40px 0;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1100px) {
+
+            .restaurant-row {
+
+                grid-template-columns:
+                    150px
+                    240px
+                    140px
+                    100px
+                    210px;
+
+                gap: 15px;
+            }
+
+
+            .restaurant-image {
+
+                width: 220px;
+
+                height: 145px;
+            }
+
+
+            .delete-button,
+            .menu-button {
+
+                width: 190px;
+            }
+        }
+
+
+        @media (max-width: 850px) {
+
+            .page-top {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 20px;
+            }
+
+
+            h1 {
+
+                font-size: 45px;
+            }
+
+
+            .restaurant-row {
+
+                display: flex;
+
+                flex-direction: column;
+
+                gap: 18px;
+
+                padding: 30px 20px;
+
+                text-align: center;
+            }
+
+
+            .restaurant-image {
+
+                width: 240px;
+
+                height: 160px;
+            }
+
+
+            .delete-button,
+            .menu-button {
+
+                width: 240px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🍴
+        </div>
+
+        <div>
+            <span class="meal">Meal</span>
+            <span class="mate">Mate</span>
+        </div>
+
+    </div>
+
+
+    <div class="header-right">
+
+        <a href="/" class="home">
+            Home
+        </a>
+
+
+        <div class="admin-button">
+
+            <div class="admin-circle">
+                A
+            </div>
+
+            Admin Panel
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+    <!-- PAGE TITLE -->
+
+    <div class="page-top">
+
+        <div>
+
+            <div class="section-label">
+                MEAL MATE MANAGEMENT
+            </div>
+
+            <h1>
+                Restaurants
+            </h1>
+
+            <p class="subtitle">
+                View and manage restaurants available on Meal Mate.
+            </p>
+
+        </div>
+
+
+        <a
+            href="/open_add_restaurant"
+            class="add-button"
+        >
+            + Add Restaurant
+        </a>
+
+    </div>
+
+
+
+    <!-- ================= RESTAURANTS ================= -->
+
+    {% if restaurant_list %}
+
+    <div class="restaurants-container">
+
+
+        {% for restaurant in restaurant_list %}
+
+        <div class="restaurant-row">
+
+
+            <!-- NAME -->
+
+            <div class="restaurant-name">
+
+                {{ restaurant.name }}
+
+            </div>
+
+
+
+            <!-- IMAGE -->
+
+            <div class="image-container">
+
+                <img
+                    src="{{ restaurant.picture }}"
+                    alt="{{ restaurant.name }}"
+                    class="restaurant-image"
+                >
+
+            </div>
+
+
+
+            <!-- CUISINE -->
+
+            <div class="cuisine">
+
+                <span class="cuisine-label">
+                    Cuisine:
+                </span>
+
+                {{ restaurant.cuisine }}
+
+            </div>
+
+
+
+            <!-- RATING -->
+
+            <div class="rating">
+
+                ★ {{ restaurant.rating }}
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="actions">
+
+
+                <a
+                    href="/open_update_restaurant/{{ restaurant.id }}"
+                    class="update-info"
+                >
+                    Update Restaurant<br>
+                    Info
+                </a>
+
+
+                <a
+                    href="/delete_restaurant/{{ restaurant.id }}"
+                    class="delete-button"
+                    onclick="return confirm('Are you sure you want to delete this restaurant?');"
+                >
+                    🗑 Delete Restaurant
+                </a>
+
+
+                <a
+                    href="/open_update_menu/{{ restaurant.id }}"
+                    class="menu-button"
+                >
+                    📋 Update Menu
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+
+    {% else %}
+
+
+    <!-- EMPTY STATE -->
+
+    <div class="restaurants-container">
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                🍽️
+            </div>
+
+            <h2>
+                No restaurants yet
+            </h2>
+
+            <p>
+                Add your first restaurant to Meal Mate.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    {% endif %}
+
+
+
+    <footer>
+
+        Meal Mate · Restaurant Management
+
+    </footer>
+
+
+</main>
+
+
+</body>
+</html>

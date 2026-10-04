@@ -1,0 +1,952 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+Meal Mate Administration
+{% endblock %}
+
+
+{% block branding %}
+
+<div id="site-name">
+
+    <a href="{% url 'admin:index' %}">
+
+        <span class="meal-logo">
+            🍴
+        </span>
+
+        <span class="meal-name">
+            Meal <span>Mate</span>
+        </span>
+
+        <span class="admin-text">
+            ADMIN
+        </span>
+
+    </a>
+
+</div>
+
+{% endblock %}
+
+
+{% block nav-global %}
+{% endblock %}
+
+
+{% block extrastyle %}
+
+{{ block.super }}
+
+<style>
+
+/* =========================================================
+   MEAL MATE COLOR SYSTEM
+========================================================= */
+
+:root {
+
+    --meal-green: #145c47;
+
+    --meal-dark-green: #0d4636;
+
+    --meal-orange: #ef7547;
+
+    --meal-cream: #f7f5ef;
+
+    --meal-white: #ffffff;
+
+    --meal-text: #173f35;
+
+    --meal-gray: #71807b;
+
+    --meal-border: #e5e2da;
+
+}
+
+
+/* =========================================================
+   MAIN PAGE
+========================================================= */
+
+html,
+body {
+
+    background:
+        var(--meal-cream) !important;
+
+    color:
+        var(--meal-text) !important;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+#header {
+
+    background:
+        var(--meal-white) !important;
+
+    color:
+        var(--meal-text) !important;
+
+    border-top:
+        4px solid var(--meal-orange) !important;
+
+    border-bottom:
+        1px solid var(--meal-border) !important;
+
+    min-height:
+        76px !important;
+
+    padding:
+        0 45px !important;
+
+}
+
+
+/* =========================================================
+   MEAL MATE BRAND
+========================================================= */
+
+#site-name {
+
+    margin:
+        0 !important;
+
+}
+
+
+#site-name a {
+
+    display:
+        flex !important;
+
+    align-items:
+        center !important;
+
+    gap:
+        10px !important;
+
+    text-decoration:
+        none !important;
+
+    color:
+        var(--meal-green) !important;
+
+}
+
+
+/* Logo */
+
+.meal-logo {
+
+    width:
+        48px;
+
+    height:
+        48px;
+
+    min-width:
+        48px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--meal-green);
+
+    color:
+        white;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    font-size:
+        21px;
+
+}
+
+
+/* Meal Mate text */
+
+.meal-name {
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        30px;
+
+    font-weight:
+        bold;
+
+    color:
+        var(--meal-green);
+
+}
+
+
+.meal-name span {
+
+    color:
+        var(--meal-orange);
+
+}
+
+
+/* Admin */
+
+.admin-text {
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        bold;
+
+    letter-spacing:
+        2px;
+
+    color:
+        var(--meal-gray);
+
+    margin-left:
+        8px;
+
+}
+
+
+/* =========================================================
+   USER TOOLS
+========================================================= */
+
+#user-tools {
+
+    color:
+        var(--meal-gray) !important;
+
+}
+
+
+#user-tools a {
+
+    color:
+        var(--meal-green) !important;
+
+}
+
+
+#user-tools a:hover {
+
+    color:
+        var(--meal-orange) !important;
+
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+#content {
+
+    background:
+        var(--meal-cream) !important;
+
+    color:
+        var(--meal-text) !important;
+
+}
+
+
+#content-main {
+
+    background:
+        transparent !important;
+
+}
+
+
+/* =========================================================
+   REMOVE DEFAULT BLUE/BLACK DJANGO COLORS
+========================================================= */
+
+#content-main .module {
+
+    background:
+        var(--meal-white) !important;
+
+    color:
+        var(--meal-text) !important;
+
+    border:
+        1px solid var(--meal-border) !important;
+
+    border-radius:
+        16px !important;
+
+    overflow:
+        hidden !important;
+
+    box-shadow:
+        0 6px 22px
+        rgba(20, 92, 71, 0.07) !important;
+
+}
+
+
+/* =========================================================
+   MODULE / APP HEADERS
+========================================================= */
+
+/*
+   This fixes the blue headers:
+   AUTHENTICATION AND AUTHORIZATION
+   DELIVERY
+*/
+
+#content-main .module h2 {
+
+    background:
+        var(--meal-green) !important;
+
+    color:
+        #ffffff !important;
+
+    font-size:
+        16px !important;
+
+    font-weight:
+        bold !important;
+
+    padding:
+        16px 20px !important;
+
+    margin:
+        0 !important;
+
+    border:
+        none !important;
+
+}
+
+
+/* Make header text WHITE */
+
+#content-main .module h2 a {
+
+    color:
+        #ffffff !important;
+
+}
+
+
+/* =========================================================
+   MODULE TABLE
+========================================================= */
+
+#content-main .module table {
+
+    width:
+        100% !important;
+
+    background:
+        #ffffff !important;
+
+    color:
+        var(--meal-text) !important;
+
+}
+
+
+#content-main .module tbody {
+
+    background:
+        #ffffff !important;
+
+}
+
+
+#content-main .module tr {
+
+    background:
+        #ffffff !important;
+
+    color:
+        var(--meal-text) !important;
+
+}
+
+
+#content-main .module tr:nth-child(even) {
+
+    background:
+        #ffffff !important;
+
+}
+
+
+#content-main .module tr:nth-child(odd) {
+
+    background:
+        #ffffff !important;
+
+}
+
+
+/* Hover */
+
+#content-main .module tr:hover {
+
+    background:
+        #f7f5ef !important;
+
+}
+
+
+/* =========================================================
+   MODEL NAME
+========================================================= */
+
+#content-main .module th,
+#content-main .module td {
+
+    background:
+        #ffffff !important;
+
+    color:
+        var(--meal-text) !important;
+
+    border-bottom:
+        1px solid var(--meal-border) !important;
+
+}
+
+
+#content-main .module th a,
+#content-main .module td a {
+
+    color:
+        var(--meal-green) !important;
+
+    font-weight:
+        600 !important;
+
+    text-decoration:
+        none !important;
+
+}
+
+
+#content-main .module th a:hover,
+#content-main .module td a:hover {
+
+    color:
+        var(--meal-orange) !important;
+
+}
+
+
+/* =========================================================
+   ADD / CHANGE LINKS
+========================================================= */
+
+#content-main .addlink {
+
+    color:
+        var(--meal-green) !important;
+
+    font-weight:
+        bold !important;
+
+}
+
+
+#content-main .changelink {
+
+    color:
+        var(--meal-green) !important;
+
+    font-weight:
+        bold !important;
+
+}
+
+
+#content-main .addlink:hover,
+#content-main .changelink:hover {
+
+    color:
+        var(--meal-orange) !important;
+
+}
+
+
+/* =========================================================
+   RECENT ACTIONS
+========================================================= */
+
+/*
+   THIS IS THE IMPORTANT PART.
+   Removes the black Recent Actions box.
+*/
+
+#content-related {
+
+    background:
+        transparent !important;
+
+}
+
+
+/* Entire Recent Actions module */
+
+#content-related .module {
+
+    background:
+        #ffffff !important;
+
+    color:
+        var(--meal-text) !important;
+
+    border:
+        1px solid var(--meal-border) !important;
+
+    border-radius:
+        16px !important;
+
+    overflow:
+        hidden !important;
+
+    box-shadow:
+        0 6px 22px
+        rgba(20, 92, 71, 0.07) !important;
+
+}
+
+
+/* Recent Actions title */
+
+#recent-actions-module h2 {
+
+    background:
+        var(--meal-green) !important;
+
+    color:
+        #ffffff !important;
+
+    padding:
+        17px 20px !important;
+
+    margin:
+        0 !important;
+
+    font-size:
+        19px !important;
+
+    font-weight:
+        bold !important;
+
+}
+
+
+/* Make sure title text is white */
+
+#recent-actions-module h2 * {
+
+    color:
+        #ffffff !important;
+
+}
+
+
+/* My actions */
+
+#recent-actions-module h3 {
+
+    background:
+        #ffffff !important;
+
+    color:
+        var(--meal-gray) !important;
+
+    padding:
+        16px 20px 8px !important;
+
+    margin:
+        0 !important;
+
+    font-size:
+        14px !important;
+
+    font-weight:
+        bold !important;
+
+}
+
+
+/* Recent action list */
+
+#recent-actions-module ul {
+
+    background:
+        #ffffff !important;
+
+    margin:
+        0 !important;
+
+    padding:
+        0 20px 20px !important;
+
+}
+
+
+/* Recent action item */
+
+#recent-actions-module li {
+
+    background:
+        #ffffff !important;
+
+    color:
+        var(--meal-text) !important;
+
+    padding:
+        13px 0 !important;
+
+    margin:
+        0 !important;
+
+    border-bottom:
+        1px solid #eeeeee !important;
+
+}
+
+
+/* Recent action links */
+
+#recent-actions-module li a {
+
+    color:
+        var(--meal-green) !important;
+
+    font-weight:
+        bold !important;
+
+    text-decoration:
+        none !important;
+
+}
+
+
+#recent-actions-module li a:hover {
+
+    color:
+        var(--meal-orange) !important;
+
+}
+
+
+/* None available */
+
+#recent-actions-module p {
+
+    background:
+        #ffffff !important;
+
+    color:
+        var(--meal-gray) !important;
+
+    padding:
+        25px 20px !important;
+
+    margin:
+        0 !important;
+
+}
+
+
+/* =========================================================
+   DJANGO RECENT ACTION ICONS
+========================================================= */
+
+#recent-actions-module .addlink {
+
+    color:
+        var(--meal-green) !important;
+
+}
+
+
+#recent-actions-module .changelink {
+
+    color:
+        var(--meal-green) !important;
+
+}
+
+
+/* =========================================================
+   BREADCRUMBS
+========================================================= */
+
+.breadcrumbs {
+
+    background:
+        #ffffff !important;
+
+    color:
+        var(--meal-gray) !important;
+
+    border-bottom:
+        1px solid var(--meal-border) !important;
+
+}
+
+
+.breadcrumbs a {
+
+    color:
+        var(--meal-green) !important;
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input {
+
+    background:
+        var(--meal-green) !important;
+
+    color:
+        #ffffff !important;
+
+    border:
+        none !important;
+
+    border-radius:
+        8px !important;
+
+    padding:
+        10px 18px !important;
+
+    font-weight:
+        bold !important;
+
+}
+
+
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.submit-row input:hover {
+
+    background:
+        var(--meal-dark-green) !important;
+
+}
+
+
+/* =========================================================
+   FORM ELEMENTS
+========================================================= */
+
+input,
+textarea,
+select {
+
+    border:
+        1px solid #d8d5cd !important;
+
+    border-radius:
+        6px !important;
+
+}
+
+
+input:focus,
+textarea:focus,
+select:focus {
+
+    border-color:
+        var(--meal-green) !important;
+
+    outline:
+        none !important;
+
+}
+
+
+/* =========================================================
+   LINKS THROUGHOUT ADMIN
+========================================================= */
+
+a {
+
+    color:
+        var(--meal-green);
+
+}
+
+
+a:hover {
+
+    color:
+        var(--meal-orange);
+
+}
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.messagelist li {
+
+    background:
+        #ffffff !important;
+
+    color:
+        var(--meal-text) !important;
+
+    border-radius:
+        8px !important;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+#footer {
+
+    background:
+        var(--meal-cream) !important;
+
+    color:
+        var(--meal-gray) !important;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    #header {
+
+        padding:
+            15px 20px !important;
+
+    }
+
+
+    .meal-name {
+
+        font-size:
+            24px;
+
+    }
+
+
+    .admin-text {
+
+        display:
+            none;
+
+    }
+
+
+    #content {
+
+        padding:
+            25px 15px !important;
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    #header {
+
+        display:
+            block !important;
+
+        min-height:
+            auto !important;
+
+        padding:
+            15px !important;
+
+    }
+
+
+    #site-name {
+
+        margin-bottom:
+            12px !important;
+
+    }
+
+
+    .meal-logo {
+
+        width:
+            42px;
+
+        height:
+            42px;
+
+        min-width:
+            42px;
+
+    }
+
+
+    .meal-name {
+
+        font-size:
+            22px;
+
+    }
+
+
+    #user-tools {
+
+        font-size:
+            11px;
+
+    }
+
+}
+
+</style>
+
+{% endblock %}

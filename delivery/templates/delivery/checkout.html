@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Meal Mate - Checkout</title>
+
+    <!-- Razorpay -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <!-- QR Code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f5ef;
+            color: #124f3e;
+        }
+
+        .checkout-container {
+            width: 100%;
+            max-width: 850px;
+            margin: auto;
+            background: #ffffff;
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+        }
+
+        /* HEADER */
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .brand-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #145c47;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .brand-name {
+            font-size: 30px;
+            font-weight: bold;
+            color: #124f3e;
+        }
+
+        .brand-subtitle {
+            margin-top: 5px;
+            color: #777777;
+            font-size: 15px;
+        }
+
+        /* ORDER */
+
+        .section-title {
+            margin-top: 35px;
+            margin-bottom: 25px;
+            font-size: 25px;
+            color: #124f3e;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 17px 0;
+            border-bottom: 1px solid #dddddd;
+            font-size: 17px;
+            color: #333333;
+        }
+
+        .item-name {
+            font-weight: 500;
+        }
+
+        .item-price {
+            font-weight: bold;
+            color: #124f3e;
+        }
+
+        /* TOTAL */
+
+        .total-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            padding-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #124f3e;
+        }
+
+        /* RAZORPAY */
+
+        .razorpay-button {
+            width: 100%;
+            margin-top: 30px;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            background: #145c47;
+            color: white;
+            font-size: 19px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .razorpay-button:hover {
+            background: #0d4636;
+        }
+
+        /* DIVIDER */
+
+        .divider {
+            height: 1px;
+            background: #dddddd;
+            margin: 30px 0;
+        }
+
+        /* UPI */
+
+        .upi-section {
+            text-align: center;
+        }
+
+        .upi-title {
+            font-size: 25px;
+            font-weight: bold;
+            color: #124f3e;
+            margin-bottom: 8px;
+        }
+
+        .upi-subtitle {
+            font-size: 15px;
+            color: #777777;
+            margin-bottom: 25px;
+        }
+
+        /* QR */
+
+        #qrcode {
+            width: 280px;
+            height: 280px;
+            margin: auto;
+            padding: 12px;
+            background: white;
+            border: 1px solid #dddddd;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        #qrcode img {
+            width: 250px;
+            height: 250px;
+        }
+
+        /* UPI ID */
+
+        .upi-id {
+            margin-top: 18px;
+            font-size: 15px;
+            color: #777777;
+        }
+
+        .upi-id strong {
+            color: #124f3e;
+        }
+
+        /* OPEN UPI */
+
+        .open-upi-button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 17px;
+            border: none;
+            border-radius: 10px;
+            background: #145c47;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .open-upi-button:hover {
+            background: #0d4636;
+        }
+
+        /* COMPLETED */
+
+        .completed-button {
+            width: 100%;
+            margin-top: 14px;
+            padding: 17px;
+            border: 1px solid #145c47;
+            border-radius: 10px;
+            background: white;
+            color: #145c47;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .completed-button:hover {
+            background: #f0f7f4;
+        }
+
+        /* MESSAGE */
+
+        .payment-message {
+            display: none;
+            margin-top: 20px;
+            padding: 17px;
+            border-radius: 10px;
+            background: #e9f7ef;
+            border: 1px solid #b7dfc6;
+            color: #176b3a;
+            font-weight: bold;
+        }
+
+        /* ERROR */
+
+        .error {
+            margin-top: 30px;
+            padding: 20px;
+            background: #ffe8e8;
+            border: 1px solid #ffb5b5;
+            border-radius: 10px;
+            color: #c62828;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .checkout-container {
+                padding: 25px 20px;
+                border-radius: 20px;
+            }
+
+            .brand-logo {
+                width: 52px;
+                height: 52px;
+                font-size: 26px;
+            }
+
+            .brand-name {
+                font-size: 25px;
+            }
+
+            .brand-subtitle {
+                font-size: 13px;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+
+            .total-section {
+                font-size: 19px;
+            }
+
+            .upi-title {
+                font-size: 22px;
+            }
+
+            .upi-subtitle {
+                font-size: 14px;
+            }
+
+            #qrcode {
+                width: 240px;
+                height: 240px;
+            }
+
+            #qrcode img {
+                width: 210px;
+                height: 210px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="checkout-container">
+
+
+    <!-- MEAL MATE -->
+
+    <div class="brand">
+
+        <div class="brand-logo">
+            M
+        </div>
+
+        <div>
+
+            <div class="brand-name">
+                Meal Mate
+            </div>
+
+            <div class="brand-subtitle">
+                Fresh meals, thoughtfully delivered.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {% if error %}
+
+        <div class="error">
+            {{ error }}
+        </div>
+
+    {% else %}
+
+
+        <!-- ORDER SUMMARY -->
+
+        <h2 class="section-title">
+            Order Summary
+        </h2>
+
+
+        {% for item in cart_items %}
+
+            <div class="cart-item">
+
+                <span class="item-name">
+                    {{ item.name }}
+                </span>
+
+                <span class="item-price">
+                    ₹{{ item.price }}
+                </span>
+
+            </div>
+
+        {% empty %}
+
+            <div class="cart-item">
+                No items in your cart.
+            </div>
+
+        {% endfor %}
+
+
+        <!-- TOTAL -->
+
+        <div class="total-section">
+
+            <span>
+                Total Amount
+            </span>
+
+            <span>
+                ₹{{ total_price }}
+            </span>
+
+        </div>
+
+
+        <!-- RAZORPAY -->
+
+        <button
+            type="button"
+            id="razorpay-button"
+            class="razorpay-button">
+
+            Pay ₹{{ total_price }} with Razorpay
+
+        </button>
+
+
+        <div class="divider"></div>
+
+
+        <!-- UPI -->
+
+        <div class="upi-section">
+
+            <div class="upi-title">
+                Pay using UPI
+            </div>
+
+            <div class="upi-subtitle">
+                Scan the QR code using Google Pay,
+                PhonePe or Paytm
+            </div>
+
+
+            <!-- QR CODE -->
+
+            <div id="qrcode"></div>
+
+
+            <!-- UPI ID -->
+
+            <div class="upi-id">
+
+                UPI ID:
+
+                <strong>
+                    9542180085-6@ybl
+                </strong>
+
+            </div>
+
+
+            <!-- OPEN UPI -->
+
+            <button
+                type="button"
+                id="open-upi"
+                class="open-upi-button">
+
+                Open UPI App
+
+            </button>
+
+
+            <!-- COMPLETED -->
+
+            <button
+                type="button"
+                id="completed-button"
+                class="completed-button">
+
+                I Have Completed Payment
+
+            </button>
+
+
+            <div
+                id="payment-message"
+                class="payment-message">
+
+                Payment completion submitted.
+                Please verify the payment before
+                confirming the order.
+
+            </div>
+
+        </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+<script>
+
+{% if not error %}
+
+
+/* ==========================================
+   UPI INFORMATION
+========================================== */
+
+var upiId = "9542180085-6@ybl";
+
+var amount = "{{ total_price }}";
+
+
+/* ==========================================
+   UPI LINK
+========================================== */
+
+var upiLink =
+    "upi://pay" +
+    "?pa=" + encodeURIComponent(upiId) +
+    "&pn=" + encodeURIComponent("Meal Mate") +
+    "&am=" + encodeURIComponent(amount) +
+    "&cu=INR" +
+    "&tn=" + encodeURIComponent("Meal Mate Food Order");
+
+
+/* ==========================================
+   GENERATE QR
+========================================== */
+
+new QRCode(
+    document.getElementById("qrcode"),
+    {
+        text: upiLink,
+        width: 250,
+        height: 250,
+        correctLevel: QRCode.CorrectLevel.H
+    }
+);
+
+
+/* ==========================================
+   DEVICE CHECK
+========================================== */
+
+var isMobile =
+    /Android|iPhone|iPad|iPod/i.test(
+        navigator.userAgent
+    );
+
+
+/* ==========================================
+   OPEN UPI APP
+========================================== */
+
+document
+    .getElementById("open-upi")
+    .onclick = function () {
+
+        /*
+         * On a mobile phone:
+         * this sends the UPI payment request
+         * to a compatible installed UPI app.
+         */
+
+        if (isMobile) {
+
+            window.location.href = upiLink;
+
+        } else {
+
+            /*
+             * On desktop:
+             * keep the button visible,
+             * but tell the user to scan the QR.
+             */
+
+            alert(
+                "Please scan the QR code with your mobile UPI app."
+            );
+
+        }
+
+    };
+
+
+/* ==========================================
+   COMPLETED PAYMENT
+========================================== */
+
+document
+    .getElementById("completed-button")
+    .onclick = function () {
+
+        document
+            .getElementById("payment-message")
+            .style.display = "block";
+
+    };
+
+
+/* ==========================================
+   RAZORPAY PAYMENT
+========================================== */
+
+document
+    .getElementById("razorpay-button")
+    .onclick = function () {
+
+
+        var options = {
+
+            "key":
+                "{{ razorpay_key_id }}",
+
+            "amount":
+                "{{ amount }}",
+
+            "currency":
+                "INR",
+
+            "name":
+                "Meal Mate",
+
+            "description":
+                "Meal Mate Food Order",
+
+            "order_id":
+                "{{ order_id }}",
+
+            "prefill": {
+
+                "name":
+                    "{{ username }}"
+
+            },
+
+            "handler":
+                function(response) {
+
+                    alert(
+                        "Payment Successful!\n\n" +
+                        "Payment ID: " +
+                        response.razorpay_payment_id
+                    );
+
+                    console.log(
+                        "Payment ID:",
+                        response.razorpay_payment_id
+                    );
+
+                    console.log(
+                        "Order ID:",
+                        response.razorpay_order_id
+                    );
+
+                    console.log(
+                        "Signature:",
+                        response.razorpay_signature
+                    );
+
+                },
+
+            "theme": {
+
+                "color":
+                    "#145c47"
+
+            }
+
+        };
+
+
+        var razorpay =
+            new Razorpay(options);
+
+
+        razorpay.on(
+            "payment.failed",
+            function(response) {
+
+                alert(
+                    "Payment Failed!\n\n" +
+                    response.error.description
+                );
+
+            }
+        );
+
+
+        razorpay.open();
+
+    };
+
+{% endif %}
+
+</script>
+
+
+</body>
+
+</html>

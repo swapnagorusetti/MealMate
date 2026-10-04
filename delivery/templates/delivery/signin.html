@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Meal Mate - Sign In</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background: #f7f5ee;
+            color: #164c3b;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 72px;
+
+            background: #fffef9;
+
+            border-top: 4px solid #ef7547;
+            border-bottom: 1px solid #e5e1d7;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #164c3b;
+
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+
+        .logo span {
+            color: #ef7547;
+        }
+
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            background: #164c3b;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+        }
+
+
+        /* HOME */
+
+        .home-link {
+            position: absolute;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            color: #164c3b;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            padding-bottom: 6px;
+
+            border-bottom: 2px solid #ef7547;
+        }
+
+
+        /* RIGHT */
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+
+        .signup-link {
+            color: #164c3b;
+
+            font-size: 16px;
+
+            font-weight: bold;
+        }
+
+
+        .signup-link:hover {
+            color: #ef7547;
+        }
+
+
+        .create-button {
+            background: #164c3b;
+
+            color: white;
+
+            padding: 12px 22px;
+
+            border-radius: 5px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+        }
+
+
+        .create-button:hover {
+            background: #0d392d;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .page {
+            min-height: calc(100vh - 72px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 40px 6%;
+        }
+
+
+        .signin-container {
+            width: 100%;
+
+            max-width: 1050px;
+
+            min-height: 600px;
+
+            background: #fffef9;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            display: grid;
+
+            grid-template-columns: 46% 54%;
+
+            box-shadow:
+                0 18px 50px rgba(22, 76, 59, 0.12);
+        }
+
+
+        /* =========================
+           LEFT FOOD IMAGE
+        ========================= */
+
+        .food-section {
+            position: relative;
+
+            min-height: 600px;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            padding: 42px;
+        }
+
+
+        .food-section::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(22, 76, 59, 0.04),
+                    rgba(22, 76, 59, 0.72)
+                );
+
+            z-index: 1;
+        }
+
+
+        .food-image {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        .food-content {
+            position: relative;
+
+            z-index: 2;
+
+            color: white;
+
+            max-width: 410px;
+        }
+
+
+        .food-small {
+            font-size: 13px;
+
+            letter-spacing: 4px;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+
+        .food-title {
+            font-size: 48px;
+
+            line-height: 1;
+
+            margin-bottom: 18px;
+        }
+
+
+        .food-title span {
+            color: #ef7547;
+        }
+
+
+        .food-description {
+            font-family: Arial, sans-serif;
+
+            font-size: 16px;
+
+            line-height: 1.6;
+
+            color: #f5f5f5;
+        }
+
+
+        .food-tag {
+            display: inline-block;
+
+            margin-top: 22px;
+
+            padding: 9px 15px;
+
+            background: rgba(255,255,255,0.92);
+
+            color: #164c3b;
+
+            border-radius: 20px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           RIGHT FORM
+        ========================= */
+
+        .form-section {
+            padding: 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        .form-title {
+            font-size: 45px;
+
+            color: #164c3b;
+
+            margin-bottom: 8px;
+        }
+
+
+        .form-subtitle {
+            font-family: Arial, sans-serif;
+
+            color: #68736e;
+
+            font-size: 16px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+
+        .form-group label {
+            display: block;
+
+            color: #164c3b;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+
+        .form-group input {
+            width: 100%;
+
+            height: 52px;
+
+            border: 1px solid #d6dcd7;
+
+            background: white;
+
+            border-radius: 7px;
+
+            padding: 0 16px;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+
+        .form-group input:focus {
+            border-color: #164c3b;
+
+            box-shadow:
+                0 0 0 3px rgba(22, 76, 59, 0.08);
+        }
+
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+
+        /* =========================
+           SIGN IN BUTTON
+        ========================= */
+
+        .signin-button {
+            width: 100%;
+
+            height: 53px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: #164c3b;
+
+            color: white;
+
+            font-family: Georgia, serif;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+
+            transition: 0.3s;
+        }
+
+
+        .signin-button:hover {
+            background: #0d392d;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================
+           CREATE ACCOUNT
+        ========================= */
+
+        .bottom-text {
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #777;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 15px;
+        }
+
+
+        .bottom-text a {
+            color: #ef7547;
+
+            font-weight: bold;
+        }
+
+
+        .bottom-text a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .signin-container {
+                grid-template-columns: 1fr;
+
+                max-width: 600px;
+            }
+
+
+            .food-section {
+                min-height: 300px;
+
+                padding: 30px;
+            }
+
+
+            .food-title {
+                font-size: 38px;
+            }
+
+
+            .form-section {
+                padding: 40px;
+            }
+
+
+            .home-link {
+                display: none;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+
+            .logo {
+                font-size: 22px;
+            }
+
+
+            .nav-right {
+                gap: 12px;
+            }
+
+
+            .signup-link {
+                display: none;
+            }
+
+
+            .create-button {
+                padding: 10px 15px;
+            }
+
+
+            .page {
+                padding: 20px 15px;
+            }
+
+
+            .signin-container {
+                border-radius: 14px;
+            }
+
+
+            .food-section {
+                min-height: 260px;
+            }
+
+
+            .form-section {
+                padding: 30px 22px;
+            }
+
+
+            .form-title {
+                font-size: 36px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+
+    <!-- LOGO -->
+
+    <a href="/" class="logo">
+
+        <div class="logo-icon">
+            🍴
+        </div>
+
+        Meal <span>Mate</span>
+
+    </a>
+
+
+    <!-- HOME -->
+
+    <a href="/" class="home-link">
+        Home
+    </a>
+
+
+    <!-- RIGHT -->
+
+    <div class="nav-right">
+
+        <a
+            href="/open_signup"
+            class="signup-link">
+
+            Create account
+
+        </a>
+
+
+        <a
+            href="/open_signup"
+            class="create-button">
+
+            Sign up
+
+        </a>
+
+    </div>
+
+
+</header>
+
+
+
+<!-- =========================
+     SIGN IN PAGE
+========================= -->
+
+<main class="page">
+
+
+    <div class="signin-container">
+
+
+        <!-- =====================
+             FOOD IMAGE
+        ====================== -->
+
+        <section class="food-section">
+
+
+            <img
+                class="food-image"
+                src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1000&q=85"
+                alt="Delicious food"
+            >
+
+
+            <div class="food-content">
+
+
+                <div class="food-small">
+
+                    GOOD FOOD, GOOD TIMING
+
+                </div>
+
+
+                <h2 class="food-title">
+
+                    Welcome to
+                    <span>Meal Mate</span>
+
+                </h2>
+
+
+                <p class="food-description">
+
+                    Your favorite meals are waiting for you.
+                    Sign in and continue your delicious
+                    journey with Meal Mate.
+
+                </p>
+
+
+                <div class="food-tag">
+
+                    ✦ Good Food Brings Good Mood
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================
+             FORM
+        ====================== -->
+
+        <section class="form-section">
+
+
+            <h1 class="form-title">
+
+                Welcome Back!
+
+            </h1>
+
+
+            <p class="form-subtitle">
+
+                Sign in to your Meal Mate account 😊
+
+            </p>
+
+
+            <form
+                method="POST"
+                action="/signin">
+
+                {% csrf_token %}
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="username">
+
+                        Username
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+
+                        Password
+
+                    </label>
+
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="signin-button">
+
+                    Sign In →
+
+                </button>
+
+
+            </form>
+
+
+            <!-- CREATE ACCOUNT -->
+
+            <div class="bottom-text">
+
+                Don't have an account?
+
+                <a href="/open_signup">
+
+                    Create Account
+
+                </a>
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+</main>
+
+
+</body>
+
+</html>

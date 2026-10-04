@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Menu - Meal Mate</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f5ee;
+            color: #164f3d;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 80px;
+            background: #fffefa;
+            border-top: 3px solid #ff633f;
+            border-bottom: 1px solid #dedbd2;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-circle {
+            width: 44px;
+            height: 44px;
+
+            border-radius: 50%;
+            background: #145540;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 21px;
+        }
+
+        .logo-text {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            font-weight: bold;
+            color: #164f3d;
+        }
+
+        .logo-text span {
+            color: #f26745;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .home-link {
+            text-decoration: none;
+            color: #164f3d;
+            font-family: Georgia, serif;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .cart-link {
+            text-decoration: none;
+            background: #145540;
+            color: white;
+
+            padding: 12px 22px;
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+        .cart-link:hover {
+            background: #0e4433;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 1100px;
+            max-width: 90%;
+            margin: 65px auto;
+        }
+
+        .small-title {
+            color: #f26745;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            margin-bottom: 14px;
+        }
+
+        .welcome {
+            font-family: Georgia, serif;
+            font-size: 48px;
+            color: #145540;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #60766d;
+            margin-bottom: 45px;
+        }
+
+
+        /* ================= MENU CARD ================= */
+
+        .menu-card {
+            background: #fffefa;
+
+            border: 1px solid #dedbd2;
+            border-radius: 18px;
+
+            box-shadow: 0 15px 35px rgba(20, 85, 64, 0.08);
+
+            overflow: hidden;
+        }
+
+        .menu-header {
+            background: #145540;
+            color: white;
+
+            padding: 18px 25px;
+
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .menu-header div {
+            display: flex;
+            align-items: center;
+        }
+
+
+        /* ================= MENU ITEM ================= */
+
+        .menu-item {
+            display: grid;
+
+            grid-template-columns:
+                2fr
+                1fr
+                1fr
+                1fr
+                1fr;
+
+            align-items: center;
+
+            min-height: 130px;
+
+            padding: 18px 25px;
+
+            border-bottom: 1px solid #e6e3dc;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-family: Georgia, serif;
+            font-size: 21px;
+            font-weight: bold;
+            color: #164f3d;
+        }
+
+        .item-description {
+            color: #657970;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+
+        /* ================= IMAGE ================= */
+
+        .item-image {
+            width: 95px;
+            height: 75px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+
+            border: 1px solid #ddd8cf;
+
+            display: block;
+        }
+
+
+        /* ================= PRICE ================= */
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #164f3d;
+        }
+
+
+        /* ================= VEG ================= */
+
+        .veg {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .veg-dot {
+            width: 12px;
+            height: 12px;
+
+            border-radius: 50%;
+            background: #20a34a;
+        }
+
+        .nonveg-dot {
+            width: 12px;
+            height: 12px;
+
+            border-radius: 50%;
+            background: #e53935;
+        }
+
+
+        /* ================= ADD TO CART ================= */
+
+        .add-cart {
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #145540;
+            color: white;
+
+            padding: 11px 18px;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            text-align: center;
+
+            transition: 0.2s;
+        }
+
+        .add-cart:hover {
+            background: #0d4332;
+            transform: translateY(-1px);
+        }
+
+
+        /* ================= EMPTY MENU ================= */
+
+        .empty {
+            text-align: center;
+            padding: 70px 20px;
+
+            color: #60766d;
+        }
+
+        .empty-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .empty h2 {
+            font-family: Georgia, serif;
+            color: #145540;
+            margin-bottom: 10px;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+            margin: 60px 0 30px;
+
+            color: #789087;
+            font-size: 14px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 850px) {
+
+            .container {
+                max-width: 94%;
+            }
+
+            .welcome {
+                font-size: 38px;
+            }
+
+            .menu-header {
+                display: none;
+            }
+
+            .menu-item {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+
+                gap: 14px;
+
+                padding: 22px;
+            }
+
+            .item-image {
+                width: 120px;
+                height: 90px;
+            }
+
+            .header-right .home-link {
+                display: none;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-circle">
+            🍴
+        </div>
+
+        <div class="logo-text">
+            Meal <span>Mate</span>
+        </div>
+
+    </div>
+
+
+    <div class="header-right">
+
+        <a href="/signin" class="home-link">
+            Home
+        </a>
+
+        <a href="/show_cart/{{ username }}" class="cart-link">
+            🛒 Cart
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+    <div class="small-title">
+        MEAL MATE
+    </div>
+
+    <h1 class="welcome">
+        Welcome, {{ username }}!
+    </h1>
+
+    <p class="subtitle">
+        Choose your favourite dishes and add them to your cart.
+    </p>
+
+
+    <!-- ================= MENU ================= -->
+
+    <div class="menu-card">
+
+        <!-- HEADER -->
+
+        <div class="menu-header">
+
+            <div>ITEM</div>
+
+            <div>PICTURE</div>
+
+            <div>PRICE</div>
+
+            <div>TYPE</div>
+
+            <div>ACTION</div>
+
+        </div>
+
+
+        <!-- ITEMS -->
+
+        {% for item in itemList %}
+
+        <div class="menu-item">
+
+            <!-- NAME -->
+
+            <div>
+
+                <div class="item-name">
+                    {{ item.name }}
+                </div>
+
+                <div class="item-description">
+                    {{ item.description }}
+                </div>
+
+            </div>
+
+
+            <!-- IMAGE -->
+
+            <div>
+
+                {% if item.picture %}
+
+                    <img
+                        src="{{ item.picture }}"
+                        alt="{{ item.name }}"
+                        class="item-image"
+                    >
+
+                {% else %}
+
+                    <div class="item-image"
+                         style="display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                background:#f0eee7;
+                                color:#789087;">
+                        🍽️
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- PRICE -->
+
+            <div class="price">
+
+                ₹{{ item.price }}
+
+            </div>
+
+
+            <!-- VEG / NON VEG -->
+
+            <div>
+
+                {% if item.vegetarian %}
+
+                    <div class="veg">
+
+                        <span class="veg-dot"></span>
+
+                        Veg
+
+                    </div>
+
+                {% else %}
+
+                    <div class="veg">
+
+                        <span class="nonveg-dot"></span>
+
+                        Non-Veg
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- ADD TO CART -->
+
+            <div>
+
+                <a
+                    href="/add_to_cart/{{ item.id }}/{{ username }}"
+                    class="add-cart"
+                >
+                    Add to cart
+                </a>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                🍽️
+            </div>
+
+            <h2>
+                No menu items yet
+            </h2>
+
+            <p>
+                This restaurant doesn't have any menu items yet.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- ================= CART BUTTON ================= -->
+
+    <div style="text-align:center; margin-top:30px;">
+
+        <a
+            href="/show_cart/{{ username }}"
+            class="cart-link"
+        >
+            🛒 Go to Cart
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    Meal Mate · Fresh meals, thoughtfully delivered.
+
+</footer>
+
+
+</body>
+</html>

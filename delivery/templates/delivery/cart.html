@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Cart - Meal Mate</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f5ee;
+            color: #164f3d;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 80px;
+            background: #fffefa;
+            border-top: 3px solid #ff633f;
+            border-bottom: 1px solid #dedbd2;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+        }
+
+        .logo {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 32px;
+            font-weight: bold;
+            color: #164f3d;
+        }
+
+        .logo span {
+            color: #f26745;
+        }
+
+        .home-link {
+            text-decoration: none;
+            color: #164f3d;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .home-link:hover {
+            color: #f26745;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 1100px;
+            max-width: 90%;
+            margin: 55px auto 80px;
+        }
+
+        .small-title {
+            color: #f26745;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 55px;
+            color: #164f3d;
+            margin-bottom: 12px;
+        }
+
+        .welcome {
+            font-size: 18px;
+            color: #60766d;
+            margin-bottom: 35px;
+        }
+
+        /* ================= CART CARD ================= */
+
+        .cart-card {
+            background: #fffefa;
+            border: 1px solid #dedbd2;
+            border-radius: 18px;
+
+            box-shadow: 0 15px 35px rgba(20, 85, 64, 0.08);
+
+            overflow: hidden;
+        }
+
+        /* ================= TOP BAR ================= */
+
+        .cart-header {
+            padding: 25px 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid #e3e0d8;
+        }
+
+        .cart-header h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 28px;
+            color: #164f3d;
+        }
+
+        .item-count {
+            background: #eaf1ec;
+            color: #164f3d;
+
+            padding: 9px 16px;
+            border-radius: 20px;
+
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* ================= TABLE ================= */
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #145540;
+            color: white;
+
+            text-align: left;
+
+            padding: 16px 22px;
+
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 20px 22px;
+
+            border-bottom: 1px solid #e5e2da;
+
+            color: #354e45;
+            font-size: 16px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ================= ITEM IMAGE ================= */
+
+        .item-image {
+            width: 110px;
+            height: 85px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+
+            display: block;
+
+            border: 1px solid #e0ddd5;
+        }
+
+        .item-name {
+            font-weight: bold;
+            color: #164f3d;
+            font-size: 18px;
+        }
+
+        .description {
+            color: #687a73;
+            font-size: 15px;
+        }
+
+        .price {
+            color: #164f3d;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* ================= EMPTY CART ================= */
+
+        .empty-cart {
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .empty-icon {
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            background: #eaf1ec;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 32px;
+        }
+
+        .empty-cart h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .empty-cart p {
+            color: #687a73;
+            margin-bottom: 25px;
+        }
+
+        /* ================= BOTTOM ================= */
+
+        .cart-bottom {
+            padding: 28px 30px;
+
+            border-top: 1px solid #dedbd2;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .total-label {
+            color: #60766d;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .total-price {
+            color: #164f3d;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 34px;
+            font-weight: bold;
+        }
+
+        /* ================= CHECKOUT BUTTON ================= */
+
+        .checkout-btn {
+            border: none;
+
+            background: #145540;
+            color: white;
+
+            padding: 15px 30px;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            display: inline-block;
+        }
+
+        .checkout-btn:hover {
+            background: #0e4232;
+        }
+
+        /* ================= CONTINUE SHOPPING ================= */
+
+        .continue {
+            display: inline-block;
+
+            margin-top: 25px;
+
+            color: #145540;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            font-size: 16px;
+        }
+
+        .continue:hover {
+            color: #f26745;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+            color: #789087;
+            font-size: 14px;
+            margin-top: 45px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 0 5%;
+            }
+
+            .logo {
+                font-size: 25px;
+            }
+
+            .container {
+                max-width: 94%;
+                margin-top: 35px;
+            }
+
+            h1 {
+                font-size: 40px;
+            }
+
+            .cart-header {
+                padding: 20px;
+            }
+
+            th,
+            td {
+                padding: 13px;
+            }
+
+            .item-image {
+                width: 80px;
+                height: 65px;
+            }
+
+            .cart-bottom {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 20px;
+            }
+
+            .checkout-btn {
+                text-align: center;
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+        Meal <span>Mate</span>
+    </div>
+
+    <a href="/open_show_restaurant" class="home-link">
+        Home
+    </a>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+    <div class="small-title">
+        MEAL MATE
+    </div>
+
+    <h1>
+        My Cart
+    </h1>
+
+    <p class="welcome">
+        Hi {{ username }}, here are your selected items.
+    </p>
+
+
+    <!-- ================= CART ================= -->
+
+    <div class="cart-card">
+
+
+        {% if itemList %}
+
+
+        <div class="cart-header">
+
+            <h2>
+                Your Items
+            </h2>
+
+            <div class="item-count">
+                {{ itemList|length }} item{{ itemList|length|pluralize }}
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Item
+                        </th>
+
+                        <th>
+                            Name
+                        </th>
+
+                        <th>
+                            Description
+                        </th>
+
+                        <th>
+                            Price
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for item in itemList %}
+
+                    <tr>
+
+                        <td>
+
+                            {% if item.picture %}
+
+                                <img
+                                    src="{{ item.picture }}"
+                                    alt="{{ item.name }}"
+                                    class="item-image"
+                                >
+
+                            {% else %}
+
+                                <div class="item-image"
+                                     style="display:flex;align-items:center;justify-content:center;background:#eaf1ec;font-size:28px;">
+                                    🍽️
+                                </div>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="item-name">
+                                {{ item.name }}
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="description">
+                                {{ item.description }}
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="price">
+                                ₹{{ item.price }}
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- ================= TOTAL ================= -->
+
+        <div class="cart-bottom">
+
+            <div>
+
+                <div class="total-label">
+                    Total Amount
+                </div>
+
+                <div class="total-price">
+                    ₹{{ total_price }}
+                </div>
+
+            </div>
+
+
+            <a
+                href="/checkout/{{ username }}"
+                class="checkout-btn"
+            >
+                CHECK OUT →
+            </a>
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- ================= EMPTY CART ================= -->
+
+        <div class="empty-cart">
+
+            <div class="empty-icon">
+                🛒
+            </div>
+
+            <h2>
+                Your cart is empty
+            </h2>
+
+            <p>
+                Add some delicious meals to your cart.
+            </p>
+
+            <a
+                href="/open_show_restaurant"
+                class="checkout-btn"
+            >
+                Browse Restaurants →
+            </a>
+
+        </div>
+
+
+        {% endif %}
+
+    </div>
+
+
+    {% if itemList %}
+
+    <a
+        href="/open_show_restaurant"
+        class="continue"
+    >
+        ← Continue Shopping
+    </a>
+
+    {% endif %}
+
+
+    <footer>
+        Meal Mate · Fresh meals, thoughtfully delivered.
+    </footer>
+
+</div>
+
+
+</body>
+
+</html>

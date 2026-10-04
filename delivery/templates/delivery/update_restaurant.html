@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Update Restaurant - Meal Mate</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            background: #f8f7f2;
+            color: #164f3d;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        header {
+
+            height: 82px;
+
+            background: #ffffff;
+
+            border-top: 4px solid #f16b45;
+
+            border-bottom: 1px solid #deded8;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 5.5%;
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-family: Georgia, serif;
+
+            font-size: 31px;
+
+            font-weight: bold;
+        }
+
+
+        .logo-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: #145540;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 20px;
+        }
+
+
+        .meal {
+            color: #145540;
+        }
+
+
+        .mate {
+            color: #f16b45;
+        }
+
+
+        .header-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 25px;
+        }
+
+
+        .home {
+
+            color: #145540;
+
+            text-decoration: none;
+
+            font-family: Georgia, serif;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+
+        .admin-button {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            background: #eef1ec;
+
+            color: #164f3d;
+
+            padding: 10px 18px;
+
+            border-radius: 30px;
+
+            font-family: Georgia, serif;
+
+            font-weight: bold;
+        }
+
+
+        .admin-circle {
+
+            width: 32px;
+
+            height: 32px;
+
+            background: #145540;
+
+            color: white;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+
+            width: 88%;
+
+            max-width: 1050px;
+
+            margin: 60px auto 80px;
+        }
+
+
+        .top-section {
+
+            margin-bottom: 35px;
+        }
+
+
+        .section-label {
+
+            color: #f16b45;
+
+            font-family: Georgia, serif;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            letter-spacing: 4px;
+
+            margin-bottom: 12px;
+        }
+
+
+        h1 {
+
+            color: #145540;
+
+            font-family: Georgia, serif;
+
+            font-size: 52px;
+
+            line-height: 1;
+
+            margin-bottom: 14px;
+        }
+
+
+        .subtitle {
+
+            color: #58716b;
+
+            font-size: 17px;
+        }
+
+
+        /* ================= FORM CARD ================= */
+
+        .form-card {
+
+            background: #ffffff;
+
+            border: 1px solid #deded8;
+
+            border-radius: 16px;
+
+            padding: 45px;
+
+            box-shadow:
+                0 15px 35px rgba(22, 79, 61, 0.08);
+
+            max-width: 850px;
+
+            margin: auto;
+        }
+
+
+        .form-heading {
+
+            color: #145540;
+
+            font-family: Georgia, serif;
+
+            font-size: 30px;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .form-group {
+
+            margin-bottom: 23px;
+        }
+
+
+        label {
+
+            display: block;
+
+            color: #164f3d;
+
+            font-weight: bold;
+
+            font-size: 15px;
+
+            margin-bottom: 8px;
+        }
+
+
+        input {
+
+            width: 100%;
+
+            height: 48px;
+
+            padding: 0 15px;
+
+            border: 1px solid #d6d9d2;
+
+            border-radius: 7px;
+
+            background: #ffffff;
+
+            color: #164f3d;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+
+        input:focus {
+
+            border-color: #145540;
+
+            box-shadow:
+                0 0 0 3px rgba(20, 85, 64, 0.08);
+        }
+
+
+        /* ================= IMAGE PREVIEW ================= */
+
+        .image-preview {
+
+            margin-top: 12px;
+
+            display: none;
+        }
+
+
+        .image-preview img {
+
+            width: 120px;
+
+            height: 80px;
+
+            object-fit: cover;
+
+            border-radius: 8px;
+
+            border: 1px solid #deded8;
+        }
+
+
+        /* ================= BUTTONS ================= */
+
+        .button-row {
+
+            display: flex;
+
+            gap: 15px;
+
+            margin-top: 30px;
+        }
+
+
+        .update-button {
+
+            background: #145540;
+
+            color: white;
+
+            border: none;
+
+            padding: 14px 30px;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .update-button:hover {
+
+            background: #0d4030;
+        }
+
+
+        .cancel-button {
+
+            background: #eef1ec;
+
+            color: #145540;
+
+            text-decoration: none;
+
+            padding: 14px 30px;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+        }
+
+
+        .cancel-button:hover {
+
+            background: #e2e8e1;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            text-align: center;
+
+            color: #82918d;
+
+            font-size: 14px;
+
+            margin-top: 35px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 700px) {
+
+            .container {
+
+                width: 94%;
+
+                margin-top: 35px;
+            }
+
+
+            header {
+
+                padding: 0 4%;
+            }
+
+
+            .logo {
+
+                font-size: 25px;
+            }
+
+
+            .home {
+
+                display: none;
+            }
+
+
+            h1 {
+
+                font-size: 40px;
+            }
+
+
+            .form-card {
+
+                padding: 25px;
+            }
+
+
+            .button-row {
+
+                flex-direction: column;
+            }
+
+
+            .update-button,
+            .cancel-button {
+
+                text-align: center;
+
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🍴
+        </div>
+
+        <div>
+
+            <span class="meal">Meal</span>
+            <span class="mate">Mate</span>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-right">
+
+        <a href="/" class="home">
+            Home
+        </a>
+
+
+        <div class="admin-button">
+
+            <div class="admin-circle">
+                A
+            </div>
+
+            Admin Panel
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+    <div class="top-section">
+
+        <div class="section-label">
+            MEAL MATE MANAGEMENT
+        </div>
+
+
+        <h1>
+            Update Restaurant
+        </h1>
+
+
+        <p class="subtitle">
+            Edit restaurant information and keep your details up to date.
+        </p>
+
+    </div>
+
+
+
+    <!-- ================= FORM CARD ================= -->
+
+    <div class="form-card">
+
+
+        <h2 class="form-heading">
+            Restaurant Details
+        </h2>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <!-- RESTAURANT NAME -->
+
+            <div class="form-group">
+
+                <label for="name">
+                    Restaurant Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="{{ restaurant.name }}"
+                    placeholder="Enter restaurant name"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- PICTURE -->
+
+            <div class="form-group">
+
+                <label for="picture">
+                    Restaurant Image URL
+                </label>
+
+                <input
+                    type="url"
+                    id="picture"
+                    name="picture"
+                    value="{{ restaurant.picture }}"
+                    placeholder="https://example.com/restaurant.jpg"
+                    required
+                >
+
+
+                {% if restaurant.picture %}
+
+                <div class="image-preview"
+                     style="display:block;">
+
+                    <img
+                        src="{{ restaurant.picture }}"
+                        alt="{{ restaurant.name }}"
+                    >
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- CUISINE -->
+
+            <div class="form-group">
+
+                <label for="cuisine">
+                    Cuisine
+                </label>
+
+                <input
+                    type="text"
+                    id="cuisine"
+                    name="cuisine"
+                    value="{{ restaurant.cuisine }}"
+                    placeholder="Example: Indian, Pizza, Chinese"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- RATING -->
+
+            <div class="form-group">
+
+                <label for="rating">
+                    Rating
+                </label>
+
+                <input
+                    type="number"
+                    id="rating"
+                    name="rating"
+                    value="{{ restaurant.rating }}"
+                    min="0"
+                    max="5"
+                    step="0.1"
+                    placeholder="Example: 4.5"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="button-row">
+
+                <button
+                    type="submit"
+                    class="update-button"
+                >
+                    Update Restaurant →
+                </button>
+
+
+                <a
+                    href="/open_show_restaurant"
+                    class="cancel-button"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+
+
+    <footer>
+
+        Meal Mate · Restaurant Management
+
+    </footer>
+
+
+</main>
+
+
+</body>
+
+</html>
